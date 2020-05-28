@@ -1,5 +1,7 @@
 # Facts for Android
 
+[![Follow on Twitter](https://img.shields.io/twitter/follow/alvarez_tech?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=alvarez_tech)
+
 A utility application to obtain the device and OS information.
 
 * Huawei Mobile Services information
