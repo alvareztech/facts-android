@@ -42,6 +42,11 @@ val gmsInfo = listOf(
 )
 val hmsInfo = listOf(
     Info("Huawei Mobile Services available", HMS.isHMSAvailable().literal()),
+    Info("Version Code", HMS.versionCode()),
+    Info("Action", HMS.action()),
+    Info("Activity Name", HMS.activityName()),
+    Info("Version Code ID", HMS.versionCodeId()),
+    Info("JSON Version Min", HMS.jsonVersionMin()),
     Info("SDK Version Name", HMS.sdkVersionName()),
     Info("SDK Version Code", HMS.sdkVersionCode()),
     Info("App ID", HMS.appId())
