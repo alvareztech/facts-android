@@ -1,4 +1,4 @@
-# Facts for android
+# Facts for Android
 
 A utility application to obtain the device and OS information.
 
