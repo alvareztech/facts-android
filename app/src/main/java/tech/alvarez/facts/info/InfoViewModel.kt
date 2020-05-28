@@ -3,41 +3,17 @@ package tech.alvarez.facts.info
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import tech.alvarez.facts.util.Util
+import tech.alvarez.facts.*
 
-
-data class Info(val label: String, val value: String)
-
-class InfoViewModel : ViewModel() {
+class InfoViewModel(category: Category) : ViewModel() {
 
     val information: LiveData<List<Info>> = MutableLiveData<List<Info>>().apply {
-        postValue(
-            listOf(
-                Info("Android Version", Util.androidVersion()),
-                Info("Android Release", Util.androidRelease()),
-                Info("Security Path", Util.securityPath),
-                Info("Device Name", Util.getDeviceName()),
-                Info("Manufacturer", Util.manufacturer),
-                Info("Product", Util.product),
-                Info("Model", Util.model),
-                Info("Screen Size", Util.screenSize()),
-                Info("Board", Util.board),
-                Info("Display", Util.display),
-                Info("Hardware", Util.hardware),
-                Info("32 bit ABIs supported", Util.supported32bits()),
-                Info("64 bit ABIs supported", Util.supported64bits()),
-                Info("Total", Util.totalMemory()),
-                Info("Google Play Services", Util.googlePlayServices()),
-                Info("Google Play Store Package", Util.googlePlayStorePackage),
-                Info(
-                    "Google Play Services available",
-                    if (Util.isGooglePlayServicesAvailable()) "Yes" else "No"
-                ),
-                Info(
-                    "Huawei Mobile Services available",
-                    if (Util.isHuaweiMobileServicesAvailable()) "Yes" else "No"
-                )
-            )
-        )
+        when (category) {
+            Category.DEVICE -> postValue(deviceInfo)
+            Category.GMS -> postValue(gmsInfo)
+            Category.HMS -> postValue(hmsInfo)
+            Category.OS -> postValue(osInfo)
+            Category.FEATURES -> postValue(featureInfo)
+        }
     }
 }

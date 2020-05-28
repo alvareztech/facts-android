@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import tech.alvarez.facts.Category
 import tech.alvarez.facts.R
 
 class InfoFragment : Fragment() {
@@ -32,7 +33,16 @@ class InfoFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(InfoViewModel::class.java)
+
+        var category = Category.DEVICE
+        arguments?.takeIf {
+            it.containsKey("position")
+        }?.apply {
+            val position = getInt("position")
+            category = Category.values()[position]
+        }
+        viewModel =
+            ViewModelProvider(this, InfoViewModelFactory(category)).get(InfoViewModel::class.java)
 
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView?.layoutManager = linearLayoutManager

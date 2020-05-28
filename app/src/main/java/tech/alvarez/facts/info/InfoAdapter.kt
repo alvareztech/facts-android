@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import tech.alvarez.facts.Info
 import tech.alvarez.facts.R
 
 class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
