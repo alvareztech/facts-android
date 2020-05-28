@@ -19,7 +19,7 @@ class InfoFragment : Fragment() {
 
     private lateinit var viewModel: InfoViewModel
 
-    var recyclerView: RecyclerView? = null
+    private var recyclerView: RecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

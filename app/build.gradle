@@ -53,10 +53,13 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
+    implementation 'com.google.android.material:material:1.1.0'
+
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.2'
 
     implementation 'com.huawei.hms:hianalytics:5.0.0.301'
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

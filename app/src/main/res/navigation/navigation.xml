@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/infoFragment">
+    app:startDestination="@id/collectionFragment">
 
     <fragment
-        android:id="@+id/infoFragment"
-        android:name="tech.alvarez.facts.info.InfoFragment"
-        android:label="info_fragment"
-        tools:layout="@layout/info_fragment" />
+        android:id="@+id/collectionFragment"
+        android:name="tech.alvarez.facts.collection.CollectionFragment"
+        android:label="fragment_collection"
+        tools:layout="@layout/fragment_collection" />
 </navigation>
