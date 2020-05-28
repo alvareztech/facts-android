@@ -4,6 +4,9 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.huawei.hms.api.HuaweiApiAvailability
 import tech.alvarez.facts.App
 
 class Util {
@@ -73,6 +76,22 @@ class Util {
             val memInfo: ActivityManager.MemoryInfo = ActivityManager.MemoryInfo()
             actManager.getMemoryInfo(memInfo)
             return memInfo.totalMem.toString()
+        }
+
+        val googlePlayStorePackage: String = GoogleApiAvailability.GOOGLE_PLAY_STORE_PACKAGE
+
+        fun googlePlayServices(): String {
+            return GoogleApiAvailability.GOOGLE_PLAY_SERVICES_VERSION_CODE.toString()
+        }
+
+        fun isGooglePlayServicesAvailable(): Boolean {
+            return GoogleApiAvailability.getInstance()
+                .isGooglePlayServicesAvailable(App.applicationContext()) == ConnectionResult.SUCCESS
+        }
+
+        fun isHuaweiMobileServicesAvailable(): Boolean {
+            return HuaweiApiAvailability.getInstance()
+                .isHuaweiMobileServicesAvailable(App.applicationContext()) == com.huawei.hms.api.ConnectionResult.SUCCESS
         }
     }
 }

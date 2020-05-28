@@ -26,7 +26,17 @@ class InfoViewModel : ViewModel() {
                 Info("Hardware", Util.hardware),
                 Info("32 bit ABIs supported", Util.supported32bits()),
                 Info("64 bit ABIs supported", Util.supported64bits()),
-                Info("Total", Util.totalMemory())
+                Info("Total", Util.totalMemory()),
+                Info("Google Play Services", Util.googlePlayServices()),
+                Info("Google Play Store Package", Util.googlePlayStorePackage),
+                Info(
+                    "Google Play Services available",
+                    if (Util.isGooglePlayServicesAvailable()) "Yes" else "No"
+                ),
+                Info(
+                    "Huawei Mobile Services available",
+                    if (Util.isHuaweiMobileServicesAvailable()) "Yes" else "No"
+                )
             )
         )
     }
