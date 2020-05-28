@@ -1,47 +1,53 @@
 package tech.alvarez.facts
 
-import tech.alvarez.facts.util.Util
+import tech.alvarez.facts.util.*
 
 data class Info(val label: String, val value: String)
 
+fun Boolean.literal(): String {
+    return if (this) "Yes" else "No"
+}
+
+const val notAvailable = "Not Available"
+
 val deviceInfo = listOf(
-    Info("Security Path", Util.securityPath),
-    Info("Device Name", Util.getDeviceName()),
-    Info("Manufacturer", Util.manufacturer),
-    Info("Product", Util.product),
-    Info("Model", Util.model),
-    Info("Screen Size", Util.screenSize()),
-    Info("Board", Util.board),
-    Info("Display", Util.display),
-    Info("Hardware", Util.hardware),
-    Info("32 bit ABIs supported", Util.supported32bits()),
-    Info("64 bit ABIs supported", Util.supported64bits()),
-    Info("Total", Util.totalMemory())
+    Info("Device Name", Feature.getDeviceName()),
+    Info("Manufacturer", Device.manufacturer()),
+    Info("Product", Device.product()),
+    Info("Model", Device.model()),
+    Info("Screen Size", Feature.screenSize()),
+    Info("32 bit ABIs supported", Device.supported32bits()),
+    Info("64 bit ABIs supported", Device.supported64bits()),
+    Info("Java VM", Device.javaVM()),
+    Info("Density", Device.density()),
+    Info("Total Memory", Device.totalMemory())
 )
 
 val osInfo = listOf(
-    Info("Android Version", Util.androidVersion()),
-    Info("Android Release", Util.androidRelease())
+    Info("Version Release", OS.versionRelease()),
+    Info("SDK", OS.sdk()),
+    Info("Base OS", OS.baseOS()),
+    Info("Version Codename", OS.versionCodename()),
+    Info("Security Path", OS.securityPath()),
+    Info("Board", Device.board()),
+    Info("Display", Device.display()),
+    Info("Hardware", Device.hardware())
 )
 
 val gmsInfo = listOf(
-    Info("Google Play Services", Util.googlePlayServices()),
-    Info("Google Play Store Package", Util.googlePlayStorePackage),
-    Info(
-        "Google Play Services available",
-        if (Util.isGooglePlayServicesAvailable()) "Yes" else "No"
-    )
+    Info("Google Play Services Available", GMS.isGMSAvailable().literal()),
+    Info("Google Play Services Version Code", GMS.playServicesVersionCode()),
+    Info("Google Play Store Package", GMS.playStorePackage()),
+    Info("Google Play Services Package", GMS.playServicesPackage())
 )
 val hmsInfo = listOf(
-    Info(
-        "Huawei Mobile Services available",
-        if (Util.isHuaweiMobileServicesAvailable()) "Yes" else "No"
-    )
+    Info("Huawei Mobile Services available", HMS.isHMSAvailable().literal()),
+    Info("SDK Version Name", HMS.sdkVersionName()),
+    Info("SDK Version Code", HMS.sdkVersionCode()),
+    Info("App ID", HMS.appId())
 )
 
 val featureInfo = listOf(
-    Info(
-        "Huawei Mobile Services available",
-        if (Util.isHuaweiMobileServicesAvailable()) "Yes" else "No"
-    )
+    Info("Bluetooth", Feature.hasBluetooth().literal()),
+    Info("Bluetooth LE", Feature.hasBluetoothLE().literal())
 )
