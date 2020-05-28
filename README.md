@@ -11,3 +11,5 @@ A utility application to obtain the device and OS information.
 <img src="/screenshots/screenshot1.png" width="200"/><img src="/screenshots/screenshot2.png" width="200" /><img src="/screenshots/screenshot3.png" width="200" />
 
 > This project requires configuring Google Services and Huawei Mobile Services (`google-services.json` and `agconnect-services.json`)
+
+[Huawei AppGallery](https://appgallery.cloud.huawei.com/marketshare/app/C102297755)
