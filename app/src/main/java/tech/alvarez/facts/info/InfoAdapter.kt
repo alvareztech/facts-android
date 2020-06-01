@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.Info
 import tech.alvarez.facts.databinding.ItemInfoBinding
 
-class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
+class InfoAdapter(val itemListener: ItemListener) :
+    RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     var data = listOf<Info>()
         set(value) {
@@ -22,13 +23,18 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     override fun onBindViewHolder(holder: InfoViewHolder, position: Int) {
         val value = data[position]
-        holder.bind(value)
+        holder.bind(value, itemListener)
     }
 
     class InfoViewHolder(val binding: ItemInfoBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(info: Info) {
+        fun bind(info: Info, itemListener: ItemListener) {
             binding.item = info
+            binding.itemListener = itemListener
+            binding.root.setOnLongClickListener {
+                itemListener.onLongClick(info)
+                true
+            }
             binding.executePendingBindings()
         }
 
@@ -42,3 +48,10 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
     }
 }
 
+class ItemListener(
+    val clickListener: (info: Info) -> Unit,
+    val longClickListener: (info: Info) -> Unit
+) {
+    fun onClick(item: Info) = clickListener(item)
+    fun onLongClick(item: Info) = longClickListener(item)
+}

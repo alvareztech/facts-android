@@ -1,6 +1,6 @@
 package tech.alvarez.facts.util
 
-import tech.alvarez.facts.notAvailable
+import tech.alvarez.facts.Message
 
 class OS {
     companion object {
@@ -14,7 +14,7 @@ class OS {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 return android.os.Build.VERSION.SECURITY_PATCH
             }
-            return notAvailable
+            return Message.notAvailable
         }
     }
 }

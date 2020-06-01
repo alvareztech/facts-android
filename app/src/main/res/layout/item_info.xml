@@ -7,11 +7,17 @@
         <variable
             name="item"
             type="tech.alvarez.facts.Info" />
+
+        <variable
+            name="itemListener"
+            type="tech.alvarez.facts.info.ItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> itemListener.onClick(item)}">
 
         <TextView
             android:id="@+id/labelTextView"
