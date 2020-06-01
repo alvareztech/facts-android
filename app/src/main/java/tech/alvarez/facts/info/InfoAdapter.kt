@@ -28,8 +28,8 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
     class InfoViewHolder(val binding: ItemInfoBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(info: Info) {
-            binding.labelTextView.text = info.label
-            binding.valueTextView.text = info.value
+            binding.item = info
+            binding.executePendingBindings()
         }
 
         companion object {
