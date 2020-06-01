@@ -1,12 +1,10 @@
 package tech.alvarez.facts.info
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.Info
-import tech.alvarez.facts.R
+import tech.alvarez.facts.databinding.ItemInfoBinding
 
 class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
@@ -27,20 +25,18 @@ class InfoAdapter() : RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
         holder.bind(value)
     }
 
-    class InfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val labelTextView: TextView = itemView.findViewById(R.id.labelTextView)
-        val valueTextView: TextView = itemView.findViewById(R.id.valueTextView)
+    class InfoViewHolder(val binding: ItemInfoBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(info: Info) {
-            labelTextView.text = info.label
-            valueTextView.text = info.value
+            binding.labelTextView.text = info.label
+            binding.valueTextView.text = info.value
         }
 
         companion object {
             fun from(parent: ViewGroup): InfoViewHolder {
-                val view =
-                    LayoutInflater.from(parent.context).inflate(R.layout.item_info, parent, false)
-                return InfoViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemInfoBinding.inflate(layoutInflater, parent, false)
+                return InfoViewHolder(binding)
             }
         }
     }
