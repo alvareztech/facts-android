@@ -35,20 +35,28 @@ class Device {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 telephonyManager.imei
             } else {
-                telephonyManager.deviceId + " (from deviceId)"
+                telephonyManager.deviceId
             }
         }
 
         fun supported32bits(): String {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                return Build.SUPPORTED_32_BIT_ABIS.contentToString()
+                return if (Build.SUPPORTED_32_BIT_ABIS.isNotEmpty()) {
+                    Build.SUPPORTED_32_BIT_ABIS.joinToString()
+                } else {
+                    Message.none
+                }
             }
             return Message.notAvailable
         }
 
         fun supported64bits(): String {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                return Build.SUPPORTED_64_BIT_ABIS.contentToString()
+                return if (Build.SUPPORTED_64_BIT_ABIS.isNotEmpty()) {
+                    Build.SUPPORTED_64_BIT_ABIS.joinToString()
+                } else {
+                    Message.none
+                }
             }
             return Message.notAvailable
         }

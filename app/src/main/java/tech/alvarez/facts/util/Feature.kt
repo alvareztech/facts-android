@@ -8,15 +8,46 @@ import tech.alvarez.facts.App
 
 class Feature {
     companion object {
+        fun hasBluetooth() = isFeatureAvailable(PackageManager.FEATURE_BLUETOOTH)
+        fun hasBluetoothLE() = isFeatureAvailable(PackageManager.FEATURE_BLUETOOTH_LE)
+        fun hasNFC() = isFeatureAvailable(PackageManager.FEATURE_NFC)
+        fun hasGPS() = isFeatureAvailable(PackageManager.FEATURE_LOCATION_GPS)
 
-        fun hasBluetooth(): Boolean {
-            val packageManager: PackageManager = App.applicationContext().packageManager
-            return packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+        fun hasProximitySensor() = isFeatureAvailable(PackageManager.FEATURE_SENSOR_PROXIMITY)
+        fun hasAccelerometerSensor() =
+            isFeatureAvailable(PackageManager.FEATURE_SENSOR_ACCELEROMETER)
+
+        fun hasGyroscopeSensor() = isFeatureAvailable(PackageManager.FEATURE_SENSOR_GYROSCOPE)
+        fun hasLightSensor() = isFeatureAvailable(PackageManager.FEATURE_SENSOR_LIGHT)
+        fun hasBarometerSensor() = isFeatureAvailable(PackageManager.FEATURE_SENSOR_BAROMETER)
+        fun hasAmbientTemperatureSensor() =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                isFeatureAvailable(PackageManager.FEATURE_SENSOR_AMBIENT_TEMPERATURE)
+            } else {
+                false
+            }
+
+        fun hasStepCounterSensor() = isFeatureAvailable(PackageManager.FEATURE_SENSOR_STEP_COUNTER)
+        fun hasStepDetectorSensor() =
+            isFeatureAvailable(PackageManager.FEATURE_SENSOR_STEP_DETECTOR)
+
+        fun hasFingerprint() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            isFeatureAvailable(PackageManager.FEATURE_FINGERPRINT)
+        } else {
+            false
         }
 
-        fun hasBluetoothLE(): Boolean {
+        fun hasWifi() = isFeatureAvailable(PackageManager.FEATURE_WIFI)
+        fun hasWifiDirect() = isFeatureAvailable(PackageManager.FEATURE_WIFI_DIRECT)
+        fun hasCameraAR() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            isFeatureAvailable(PackageManager.FEATURE_CAMERA_AR)
+        } else {
+            false
+        }
+
+        private fun isFeatureAvailable(feature: String): Boolean {
             val packageManager: PackageManager = App.applicationContext().packageManager
-            return packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
+            return packageManager.hasSystemFeature(feature)
         }
 
         fun getDeviceName(): String {

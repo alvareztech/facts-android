@@ -13,6 +13,7 @@ class Message {
     companion object {
         const val notAvailable = "Not Available"
         const val requiresPermission = "Requires Permission (tap here)"
+        const val none = "None"
     }
 }
 
@@ -63,5 +64,20 @@ val hmsInfo = listOf(
 
 val featureInfo = listOf(
     Info("Bluetooth", Feature.hasBluetooth().literal(), null),
-    Info("Bluetooth LE", Feature.hasBluetoothLE().literal(), null)
+    Info("Bluetooth LE", Feature.hasBluetoothLE().literal(), null),
+    Info("NFC", Feature.hasNFC().literal(), null),
+    Info("GPS", Feature.hasGPS().literal(), null),
+    Info("WiFi", Feature.hasWifi().literal(), null),
+    Info("Wifi Direct", Feature.hasWifiDirect().literal(), null),
+    Info("Fingerprint", Feature.hasFingerprint().literal(), null),
+    Info("Camera AR", Feature.hasCameraAR().literal(), null),
+
+    Info("Proximity Sensor", Feature.hasProximitySensor().literal(), null),
+    Info("Accelerometer Sensor", Feature.hasAccelerometerSensor().literal(), null),
+    Info("Gyroscope Sensor", Feature.hasGyroscopeSensor().literal(), null),
+    Info("Light Sensor", Feature.hasLightSensor().literal(), null),
+    Info("Barometer Sensor (air pressure sensor)", Feature.hasBarometerSensor().literal(), null),
+    Info("Temperature Sensor", Feature.hasAmbientTemperatureSensor().literal(), null),
+    Info("Step Counter Sensor", Feature.hasStepCounterSensor().literal(), null),
+    Info("Step Detector Sensor", Feature.hasStepDetectorSensor().literal(), null)
 )
