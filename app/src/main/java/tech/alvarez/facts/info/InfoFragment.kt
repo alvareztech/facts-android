@@ -1,6 +1,5 @@
 package tech.alvarez.facts.info
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -25,6 +24,7 @@ class InfoFragment : Fragment() {
         fun newInstance() = InfoFragment()
     }
 
+    private val REQUEST_PERMISSIONS = 1
     private lateinit var viewModel: InfoViewModel
 
     private var recyclerView: RecyclerView? = null
@@ -64,14 +64,14 @@ class InfoFragment : Fragment() {
         viewModel.information.observe(viewLifecycleOwner, Observer {
             adapter?.data = it
         })
+        viewModel.reloadInformation()
     }
 
     private fun handleItemSelection(item: Info) {
         item.permission?.let {
             if (!hasPermissions(context, arrayOf(item.permission))) {
-                requestPermissions(arrayOf(item.permission), 888);
+                requestPermissions(arrayOf(item.permission), REQUEST_PERMISSIONS);
             }
-            adapter?.notifyDataSetChanged()
         }
     }
 
@@ -103,14 +103,14 @@ class InfoFragment : Fragment() {
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<out String>,
+        permissions: Array<String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (permissions[0] == Manifest.permission.WRITE_EXTERNAL_STORAGE
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {
-            // FIXME: crash
+        when (requestCode) {
+            REQUEST_PERMISSIONS ->
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    viewModel.reloadInformation()
+                }
         }
     }
 }

@@ -16,19 +16,21 @@ class Message {
     }
 }
 
-val deviceInfo = listOf(
-    Info("Device Name", Feature.getDeviceName(), null),
-    Info("Manufacturer", Device.manufacturer(), null),
-    Info("Product", Device.product(), null),
-    Info("Model", Device.model(), null),
-    Info("IMEI", Device.imei(), Manifest.permission.READ_PHONE_STATE),
-    Info("Screen Size", Feature.screenSize(), null),
-    Info("32 bit ABIs supported", Device.supported32bits(), null),
-    Info("64 bit ABIs supported", Device.supported64bits(), null),
-    Info("Java VM", Device.javaVM(), null),
-    Info("Density", Device.density(), null),
-    Info("Total Memory", Device.totalMemory(), null)
-)
+fun deviceInfo(): List<Info> {
+    return listOf(
+        Info("Device Name", Feature.getDeviceName(), null),
+        Info("Manufacturer", Device.manufacturer(), null),
+        Info("Product", Device.product(), null),
+        Info("Model", Device.model(), null),
+        Info("IMEI", Device.imei(), Manifest.permission.READ_PHONE_STATE),
+        Info("Screen Size", Feature.screenSize(), null),
+        Info("32 bit ABIs supported", Device.supported32bits(), null),
+        Info("64 bit ABIs supported", Device.supported64bits(), null),
+        Info("Java VM", Device.javaVM(), null),
+        Info("Density", Device.density(), null),
+        Info("Total Memory", Device.totalMemory(), null)
+    )
+}
 
 val osInfo = listOf(
     Info("Version Release", OS.versionRelease(), null),

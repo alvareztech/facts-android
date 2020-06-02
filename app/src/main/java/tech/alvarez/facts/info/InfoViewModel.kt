@@ -1,19 +1,21 @@
 package tech.alvarez.facts.info
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import tech.alvarez.facts.*
 
-class InfoViewModel(category: Category) : ViewModel() {
+class InfoViewModel(private val category: Category) : ViewModel() {
 
-    val information: LiveData<List<Info>> = MutableLiveData<List<Info>>().apply {
+    val information: MutableLiveData<List<Info>> = MutableLiveData<List<Info>>()
+
+    fun reloadInformation() {
+        information.value = deviceInfo()
         when (category) {
-            Category.DEVICE -> postValue(deviceInfo)
-            Category.GMS -> postValue(gmsInfo)
-            Category.HMS -> postValue(hmsInfo)
-            Category.OS -> postValue(osInfo)
-            Category.FEATURES -> postValue(featureInfo)
+            Category.DEVICE -> information.value = deviceInfo()
+            Category.GMS -> information.value = gmsInfo
+            Category.HMS -> information.value = hmsInfo
+            Category.OS -> information.value = osInfo
+            Category.FEATURES -> information.value = featureInfo
         }
     }
 }
