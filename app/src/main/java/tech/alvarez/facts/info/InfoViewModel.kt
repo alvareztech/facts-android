@@ -9,7 +9,6 @@ class InfoViewModel(private val category: Category) : ViewModel() {
     val information: MutableLiveData<List<Info>> = MutableLiveData<List<Info>>()
 
     fun reloadInformation() {
-        information.value = deviceInfo()
         when (category) {
             Category.DEVICE -> information.value = deviceInfo()
             Category.GMS -> information.value = gmsInfo

@@ -12,7 +12,6 @@ import androidx.core.app.ActivityCompat
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Message
 
-
 class Device {
     companion object {
         fun manufacturer(): String = Build.MANUFACTURER

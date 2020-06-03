@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:17.4.2'
 
     implementation 'com.huawei.hms:hianalytics:5.0.0.301'
+    implementation 'com.huawei.agconnect:agconnect-crash:1.2.1.300'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
