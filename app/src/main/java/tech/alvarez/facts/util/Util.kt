@@ -14,8 +14,6 @@ class Util {
 
         fun versionPackage(packageName: String): String {
             return try {
-                listPackageManager()
-
                 val packageInfo: PackageInfo =
                     App.applicationContext().packageManager.getPackageInfo(packageName, 0)
                 val versionName = packageInfo.versionName
