@@ -46,19 +46,22 @@ val osInfo = listOf(
 
 val gmsInfo = listOf(
     Info("Google Play Services Available", GMS.isGMSAvailable().literal(), null),
+    Info("Google Play Services Version", GMS.playServicesVersion(), null),
+    Info("Google Play Store Version", GMS.playStoreVersion(), null),
     Info("Google Play Services Version Code", GMS.playServicesVersionCode(), null),
     Info("Google Play Store Package", GMS.playStorePackage(), null),
     Info("Google Play Services Package", GMS.playServicesPackage(), null)
 )
 val hmsInfo = listOf(
     Info("Huawei Mobile Services available", HMS.isHMSAvailable().literal(), null),
+    Info("Huawei Mobile Services Version", HMS.hmsVersion(), null),
+    Info("Huawei AppGallery Version", HMS.appGalleryVersion(), null),
+    Info("SDK Version", HMS.sdkVersion(), null),
     Info("Version Code", HMS.versionCode(), null),
     Info("Action", HMS.action(), null),
     Info("Activity Name", HMS.activityName(), null),
     Info("Version Code ID", HMS.versionCodeId(), null),
     Info("JSON Version Min", HMS.jsonVersionMin(), null),
-    Info("SDK Version Name", HMS.sdkVersionName(), null),
-    Info("SDK Version Code", HMS.sdkVersionCode(), null),
     Info("App ID", HMS.appId(), null)
 )
 

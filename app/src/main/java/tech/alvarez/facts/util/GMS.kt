@@ -15,5 +15,8 @@ class GMS {
             return GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(App.applicationContext()) == ConnectionResult.SUCCESS
         }
+
+        fun playServicesVersion() = Util.versionPackage("com.google.android.gms")
+        fun playStoreVersion() = Util.versionPackage("com.android.vending")
     }
 }
