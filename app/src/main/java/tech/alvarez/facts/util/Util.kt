@@ -8,9 +8,12 @@ import android.util.Log
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Message
 
+private const val TAG = "FACTS"
+
 class Util {
     companion object {
-        private const val TAG = "HMS"
+
+        fun appVersion() = versionPackage(App.applicationContext().packageName)
 
         fun versionPackage(packageName: String): String {
             return try {

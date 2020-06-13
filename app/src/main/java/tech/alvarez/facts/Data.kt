@@ -29,7 +29,8 @@ fun deviceInfo(): List<Info> {
         Info("64 bit ABIs supported", Device.supported64bits(), 0, null),
         Info("Java VM", Device.javaVM(), 0, null),
         Info("Density", Device.density(), 0, null),
-        Info("Total Memory", Device.totalMemory(), 0, null)
+        Info("Total Memory", Device.totalMemory(), 0, null),
+        Info("OpenGL", Device.openGlVersion(), 0, null)
     )
 }
 

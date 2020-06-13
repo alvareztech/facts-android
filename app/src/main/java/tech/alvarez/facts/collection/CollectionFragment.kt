@@ -6,48 +6,47 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import tech.alvarez.facts.Category
-import tech.alvarez.facts.R
+import tech.alvarez.facts.about.AboutFragment
+import tech.alvarez.facts.databinding.FragmentCollectionBinding
 
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class CollectionFragment : Fragment() {
     private var param1: String? = null
-    private var param2: String? = null
 
-    private lateinit var viewPager: ViewPager2
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var binding: FragmentCollectionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_collection, container, false)
-    }
+        binding = FragmentCollectionBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewPagerAdapter = ViewPagerAdapter(this)
-        viewPager = view.findViewById(R.id.viewPager)
-        viewPager.adapter = viewPagerAdapter
+        binding.viewPager.adapter = viewPagerAdapter
 
-        val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             val category = Category.values()[position]
             tab.text = category.name
             tab.icon = AppCompatResources.getDrawable(context!!, category.icon)
         }.attach()
+
+        binding.fab.setOnClickListener {
+            val aboutFragment = AboutFragment.newInstance()
+            aboutFragment.show(activity!!.supportFragmentManager, "tagy")
+        }
+        return binding.root
     }
 
     companion object {
@@ -56,7 +55,6 @@ class CollectionFragment : Fragment() {
             CollectionFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
                 }
             }
     }

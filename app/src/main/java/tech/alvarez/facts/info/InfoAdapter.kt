@@ -1,12 +1,13 @@
 package tech.alvarez.facts.info
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.Info
 import tech.alvarez.facts.databinding.ItemInfoBinding
 
-class InfoAdapter(val itemListener: ItemListener) :
+class InfoAdapter(private val itemListener: ItemListener) :
     RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
 
     var data = listOf<Info>()
@@ -26,16 +27,25 @@ class InfoAdapter(val itemListener: ItemListener) :
         holder.bind(value, itemListener)
     }
 
-    class InfoViewHolder(val binding: ItemInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    class InfoViewHolder(private val binding: ItemInfoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(info: Info, itemListener: ItemListener) {
-            binding.item = info
-            binding.itemListener = itemListener
-            binding.root.setOnLongClickListener {
+        fun bind(info: Info, itemListener: ItemListener) = with(binding) {
+            iconImageView.setImageResource(info.icon)
+            iconImageView.visibility = if (info.icon == 0) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+            labelTextView.text = info.label
+            valueTextView.text = info.value
+            root.setOnClickListener {
+                itemListener.onClick(info)
+            }
+            root.setOnLongClickListener {
                 itemListener.onLongClick(info)
                 true
             }
-            binding.executePendingBindings()
         }
 
         companion object {

@@ -3,6 +3,8 @@ package tech.alvarez.facts.util
 import android.Manifest
 import android.app.ActivityManager
 import android.content.Context
+import android.content.pm.ConfigurationInfo
+import android.content.pm.FeatureInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.telephony.TelephonyManager
@@ -11,6 +13,7 @@ import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Message
+
 
 class Device {
     companion object {
@@ -90,6 +93,39 @@ class Device {
                 DisplayMetrics.DENSITY_XXXHIGH -> "XXXHigh " + metrics.densityDpi.toString() + " dpi"
                 else -> metrics.densityDpi.toString() + " dpi"
             }
+        }
+
+        fun openGlVersion(): String {
+            return getVersionFromActivityManager()
+        }
+
+        private fun getVersionFromActivityManager(): String {
+            val activityManager = App.applicationContext().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val configInfo = activityManager.deviceConfigurationInfo
+            return if (configInfo.reqGlEsVersion != ConfigurationInfo.GL_ES_VERSION_UNDEFINED) {
+                configInfo.glEsVersion
+            } else {
+               "" // 1 shl 16 // Lack of property means OpenGL ES version 1
+            }
+        }
+
+
+        private fun getVersionFromPackageManager(): Int {
+            val packageManager = App.applicationContext().packageManager
+            val featureInfos = packageManager.systemAvailableFeatures
+            if (featureInfos.isNotEmpty()) {
+                for (featureInfo in featureInfos) {
+                    // Null feature name means this feature is the open gl es version feature.
+                    if (featureInfo.name == null) {
+                        return if (featureInfo.reqGlEsVersion != FeatureInfo.GL_ES_VERSION_UNDEFINED) {
+                            featureInfo.reqGlEsVersion
+                        } else {
+                            1 shl 16 // Lack of property means OpenGL ES version 1
+                        }
+                    }
+                }
+            }
+            return 1
         }
     }
 }
