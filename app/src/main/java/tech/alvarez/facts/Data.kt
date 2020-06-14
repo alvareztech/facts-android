@@ -28,7 +28,7 @@ fun deviceInfo(): List<Info> {
         Info("Java VM", Device.javaVM(), 0, null),
         Info("Density", Device.density(), 0, null),
         Info("Total Memory", Device.totalMemory(), 0, null),
-        Info("OpenGL", Device.openGlVersion(), 0, null)
+        Info("OpenGL ES Version", Device.openGlVersion(), 0, null)
     )
 }
 
@@ -40,7 +40,9 @@ val osInfo = listOf(
     Info("Security Path", OS.securityPath(), 0, null),
     Info("Board", Device.board(), 0, null),
     Info("Display", Device.display(), 0, null),
-    Info("Hardware", Device.hardware(), 0, null)
+    Info("Hardware", Device.hardware(), 0, null),
+    Info("EMUI Version", OS.emuiVersion(), 0, null),
+    Info("MIUI Version", OS.miuiVersion(), 0, null)
 )
 
 val gmsInfo = listOf(

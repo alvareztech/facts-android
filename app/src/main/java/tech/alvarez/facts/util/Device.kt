@@ -95,22 +95,20 @@ class Device {
             }
         }
 
-        fun openGlVersion(): String {
-            return getVersionFromActivityManager()
-        }
+        fun openGlVersion() = openGlVersionFromActivityManager()
 
-        private fun getVersionFromActivityManager(): String {
-            val activityManager = App.applicationContext().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        private fun openGlVersionFromActivityManager(): String {
+            val activityManager = App.applicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             val configInfo = activityManager.deviceConfigurationInfo
             return if (configInfo.reqGlEsVersion != ConfigurationInfo.GL_ES_VERSION_UNDEFINED) {
                 configInfo.glEsVersion
             } else {
-               "" // 1 shl 16 // Lack of property means OpenGL ES version 1
+                "1" // 1 shl 16 // Lack of property means OpenGL ES version 1
             }
         }
 
-
-        private fun getVersionFromPackageManager(): Int {
+        private fun openGlVersionFromPackageManager(): Int {
             val packageManager = App.applicationContext().packageManager
             val featureInfos = packageManager.systemAvailableFeatures
             if (featureInfos.isNotEmpty()) {
