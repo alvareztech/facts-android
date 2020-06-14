@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="32dp">
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:text="@string/app_description"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/titleTextView"
@@ -39,13 +39,13 @@
         tools:text="Content" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/projectButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Page project"
-        app:icon="@drawable/ic_code"
+        android:text="@string/project_page"
+        app:icon="@drawable/ic_github"
         app:layout_constraintEnd_toEndOf="@+id/descriptionTextView"
         app:layout_constraintStart_toStartOf="@+id/descriptionTextView"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
@@ -53,21 +53,20 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/projectButton">
 
         <TextView
+            android:id="@+id/creditsTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:autoLink="web"
             android:padding="16dp"
-            android:text="Icons 8"
+            android:text="@string/credits"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            tools:text="Icons 8" />
+            tools:text="Credits to third-party libraries." />
 
     </com.google.android.material.card.MaterialCardView>
 
