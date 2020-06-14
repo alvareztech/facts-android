@@ -16,27 +16,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.Info
-import tech.alvarez.facts.R
+import tech.alvarez.facts.databinding.FragmentInfoBinding
+
+private const val REQUEST_PERMISSIONS = 777
 
 class InfoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = InfoFragment()
-    }
+    private var _binding: FragmentInfoBinding? = null
+    private val binding get() = _binding!!
 
-    private val REQUEST_PERMISSIONS = 1
     private lateinit var viewModel: InfoViewModel
 
-    private var recyclerView: RecyclerView? = null
-    private var adapter: InfoAdapter? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: InfoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.info_fragment, container, false)
-        recyclerView = view.findViewById(R.id.infoRecyclerView)
-        return view
+        _binding = FragmentInfoBinding.inflate(inflater, container, false)
+        with(binding) {
+            recyclerView = infoRecyclerView
+            return root
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,16 +55,16 @@ class InfoFragment : Fragment() {
             ViewModelProvider(this, InfoViewModelFactory(category)).get(InfoViewModel::class.java)
 
         val linearLayoutManager = LinearLayoutManager(context)
-        recyclerView?.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = linearLayoutManager
 
         adapter = InfoAdapter(ItemListener({
             handleItemSelection(it)
         }, {
             shareItem(it)
         }))
-        recyclerView!!.adapter = adapter
+        recyclerView.adapter = adapter
         viewModel.information.observe(viewLifecycleOwner, Observer {
-            adapter?.data = it
+            adapter.data = it
         })
         viewModel.reloadInformation()
     }
@@ -112,5 +114,14 @@ class InfoFragment : Fragment() {
                     viewModel.reloadInformation()
                 }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        fun newInstance() = InfoFragment()
     }
 }

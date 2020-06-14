@@ -5,9 +5,7 @@ import tech.alvarez.facts.util.*
 
 data class Info(val label: String, val value: String, val icon: Int, val permission: String?)
 
-fun Boolean.literal(): String {
-    return if (this) "Yes" else "No"
-}
+fun Boolean.literal() = if (this) "Yes" else "No"
 
 class Message {
     companion object {

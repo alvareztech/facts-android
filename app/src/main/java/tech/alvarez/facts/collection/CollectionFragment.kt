@@ -17,7 +17,8 @@ class CollectionFragment : Fragment() {
     private var param1: String? = null
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-    private lateinit var binding: FragmentCollectionBinding
+    private var _binding: FragmentCollectionBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +32,28 @@ class CollectionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCollectionBinding.inflate(inflater, container, false)
+        _binding = FragmentCollectionBinding.inflate(inflater, container, false)
+        with(binding) {
+            viewPagerAdapter = ViewPagerAdapter(this@CollectionFragment)
+            viewPager.adapter = viewPagerAdapter
 
-        viewPagerAdapter = ViewPagerAdapter(this)
-        binding.viewPager.adapter = viewPagerAdapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                val category = Category.values()[position]
+                tab.text = category.name
+                tab.icon = AppCompatResources.getDrawable(context!!, category.icon)
+            }.attach()
 
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            val category = Category.values()[position]
-            tab.text = category.name
-            tab.icon = AppCompatResources.getDrawable(context!!, category.icon)
-        }.attach()
-
-        binding.fab.setOnClickListener {
-            val aboutFragment = AboutFragment.newInstance()
-            aboutFragment.show(activity!!.supportFragmentManager, "tagy")
+            fab.setOnClickListener {
+                val aboutFragment = AboutFragment.newInstance()
+                aboutFragment.show(activity!!.supportFragmentManager, "tagy")
+            }
+            return root
         }
-        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
