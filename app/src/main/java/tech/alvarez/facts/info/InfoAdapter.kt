@@ -31,8 +31,10 @@ class InfoAdapter(private val itemListener: ItemListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(info: Info, itemListener: ItemListener) = with(binding) {
-            iconImageView.setImageResource(info.icon)
-            iconImageView.visibility = if (info.icon == 0) {
+            info.icon?.let {
+                iconImageView.setImageResource(info.icon)
+            }
+            iconImageView.visibility = if (info.icon == null) {
                 View.GONE
             } else {
                 View.VISIBLE

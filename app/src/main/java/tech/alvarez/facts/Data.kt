@@ -3,7 +3,7 @@ package tech.alvarez.facts
 import android.Manifest
 import tech.alvarez.facts.util.*
 
-data class Info(val label: String, val value: String, val icon: Int, val permission: String?)
+data class Info(val label: String, val value: String, val icon: Int?, val permission: String?)
 
 fun Boolean.literal() = if (this) "Yes" else "No"
 
@@ -17,53 +17,53 @@ class Message {
 
 fun deviceInfo(): List<Info> {
     return listOf(
-        Info("Device Name", Feature.getDeviceName(), 0, null),
-        Info("Manufacturer", Device.manufacturer(), 0, null),
-        Info("Product", Device.product(), 0, null),
-        Info("Model", Device.model(), 0, null),
-        Info("IMEI", Device.imei(), 0, Manifest.permission.READ_PHONE_STATE),
-        Info("Screen Size", Feature.screenSize(), 0, null),
-        Info("32 bit ABIs supported", Device.supported32bits(), 0, null),
-        Info("64 bit ABIs supported", Device.supported64bits(), 0, null),
-        Info("Java VM", Device.javaVM(), 0, null),
-        Info("Density", Device.density(), 0, null),
-        Info("Total Memory", Device.totalMemory(), 0, null),
-        Info("OpenGL ES Version", Device.openGlVersion(), 0, null)
+        Info("Device Name", Feature.getDeviceName(), null, null),
+        Info("Manufacturer", Device.manufacturer(), null, null),
+        Info("Product", Device.product(), null, null),
+        Info("Model", Device.model(), null, null),
+        Info("IMEI", Device.imei(), null, Manifest.permission.READ_PHONE_STATE),
+        Info("Screen Size", Feature.screenSize(), null, null),
+        Info("32 bit ABIs supported", Device.supported32bits(), null, null),
+        Info("64 bit ABIs supported", Device.supported64bits(), null, null),
+        Info("Java VM", Device.javaVM(), null, null),
+        Info("Density", Device.density(), null, null),
+        Info("Total Memory", Device.totalMemory(), null, null),
+        Info("OpenGL ES Version", Device.openGlVersion(), null, null)
     )
 }
 
 val osInfo = listOf(
-    Info("Version Release", OS.versionRelease(), 0, null),
-    Info("SDK", OS.sdk(), 0, null),
-    Info("Base OS", OS.baseOS(), 0, null),
-    Info("Version Codename", OS.versionCodename(), 0, null),
-    Info("Security Path", OS.securityPath(), 0, null),
-    Info("Board", Device.board(), 0, null),
-    Info("Display", Device.display(), 0, null),
-    Info("Hardware", Device.hardware(), 0, null),
-    Info("EMUI Version", OS.emuiVersion(), 0, null),
-    Info("MIUI Version", OS.miuiVersion(), 0, null)
+    Info("Version Release", OS.versionRelease(), null, null),
+    Info("SDK", OS.sdk(), null, null),
+    Info("Base OS", OS.baseOS(), null, null),
+    Info("Version Codename", OS.versionCodename(), null, null),
+    Info("Security Path", OS.securityPath(), null, null),
+    Info("Board", Device.board(), null, null),
+    Info("Display", Device.display(), null, null),
+    Info("Hardware", Device.hardware(), null, null),
+    Info("EMUI Version", OS.emuiVersion(), null, null),
+    Info("MIUI Version", OS.miuiVersion(), null, null)
 )
 
 val gmsInfo = listOf(
-    Info("Google Play Services Available", GMS.isGMSAvailable().literal(), 0, null),
-    Info("Google Play Services Version", GMS.playServicesVersion(), 0, null),
-    Info("Google Play Store Version", GMS.playStoreVersion(), 0, null),
-    Info("Google Play Services Version Code", GMS.playServicesVersionCode(), 0, null),
-    Info("Google Play Store Package", GMS.playStorePackage(), 0, null),
-    Info("Google Play Services Package", GMS.playServicesPackage(), 0, null)
+    Info("Google Play Services Available", GMS.isGMSAvailable().literal(), null, null),
+    Info("Google Play Services Version", GMS.playServicesVersion(), null, null),
+    Info("Google Play Store Version", GMS.playStoreVersion(), null, null),
+    Info("Google Play Services Version Code", GMS.playServicesVersionCode(), null, null),
+    Info("Google Play Store Package", GMS.playStorePackage(), null, null),
+    Info("Google Play Services Package", GMS.playServicesPackage(), null, null)
 )
 val hmsInfo = listOf(
-    Info("Huawei Mobile Services available", HMS.isHMSAvailable().literal(), 0, null),
-    Info("Huawei Mobile Services Version", HMS.hmsVersion(), 0, null),
-    Info("Huawei AppGallery Version", HMS.appGalleryVersion(), 0, null),
-    Info("SDK Version", HMS.sdkVersion(), 0, null),
-    Info("Version Code", HMS.versionCode(), 0, null),
-    Info("Action", HMS.action(), 0, null),
-    Info("Activity Name", HMS.activityName(), 0, null),
-    Info("Version Code ID", HMS.versionCodeId(), 0, null),
-    Info("JSON Version Min", HMS.jsonVersionMin(), 0, null),
-    Info("App ID", HMS.appId(), 0, null)
+    Info("Huawei Mobile Services available", HMS.isHMSAvailable().literal(), null, null),
+    Info("Huawei Mobile Services Version", HMS.hmsVersion(), null, null),
+    Info("Huawei AppGallery Version", HMS.appGalleryVersion(), null, null),
+    Info("SDK Version", HMS.sdkVersion(), null, null),
+    Info("Version Code", HMS.versionCode(), null, null),
+    Info("Action", HMS.action(), null, null),
+    Info("Activity Name", HMS.activityName(), null, null),
+    Info("Version Code ID", HMS.versionCodeId(), null, null),
+    Info("JSON Version Min", HMS.jsonVersionMin(), null, null),
+    Info("App ID", HMS.appId(), null, null)
 )
 
 val featureInfo = listOf(
@@ -76,12 +76,12 @@ val featureInfo = listOf(
     Info("Fingerprint", Feature.hasFingerprint().literal(), R.drawable.ic_fingerprint, null),
     Info("Camera AR", Feature.hasCameraAR().literal(), R.drawable.ic_camera, null),
 
-    Info("Proximity Sensor", Feature.hasProximitySensor().literal(), 0, null),
+    Info("Proximity Sensor", Feature.hasProximitySensor().literal(), R.drawable.ic_proximity_sensor, null),
     Info("Accelerometer Sensor", Feature.hasAccelerometerSensor().literal(), 0, null),
-    Info("Gyroscope Sensor", Feature.hasGyroscopeSensor().literal(), 0, null),
-    Info("Light Sensor", Feature.hasLightSensor().literal(), 0, null),
-    Info("Barometer Sensor (air pressure sensor)", Feature.hasBarometerSensor().literal(), 0, null),
-    Info("Temperature Sensor", Feature.hasAmbientTemperatureSensor().literal(), 0, null),
+    Info("Gyroscope Sensor", Feature.hasGyroscopeSensor().literal(), R.drawable.ic_gyroscope, null),
+    Info("Light Sensor", Feature.hasLightSensor().literal(), R.drawable.ic_light, null),
+    Info("Barometer Sensor (air pressure sensor)", Feature.hasBarometerSensor().literal(), R.drawable.ic_pressure, null),
+    Info("Temperature Sensor", Feature.hasAmbientTemperatureSensor().literal(), R.drawable.ic_temperature, null),
     Info("Step Counter Sensor", Feature.hasStepCounterSensor().literal(), 0, null),
     Info("Step Detector Sensor", Feature.hasStepDetectorSensor().literal(), 0, null)
 )
