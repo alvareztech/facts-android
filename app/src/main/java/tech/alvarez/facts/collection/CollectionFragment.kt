@@ -39,7 +39,7 @@ class CollectionFragment : Fragment() {
 
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 val category = Category.values()[position]
-                tab.text = category.name
+                tab.text = getString(category.title)
                 tab.icon = AppCompatResources.getDrawable(context!!, category.icon)
             }.attach()
 

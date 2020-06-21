@@ -2,7 +2,7 @@ package tech.alvarez.facts.util
 
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import tech.alvarez.facts.App
+import tech.alvarez.facts.Facts
 
 class GMS {
     companion object {
@@ -13,7 +13,7 @@ class GMS {
 
         fun isGMSAvailable(): Boolean {
             return GoogleApiAvailability.getInstance()
-                .isGooglePlayServicesAvailable(App.applicationContext()) == ConnectionResult.SUCCESS
+                .isGooglePlayServicesAvailable(Facts.applicationContext()) == ConnectionResult.SUCCESS
         }
 
         fun playServicesVersion() = Util.versionPackage("com.google.android.gms")

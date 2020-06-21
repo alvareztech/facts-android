@@ -11,9 +11,8 @@ import android.telephony.TelephonyManager
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
-import tech.alvarez.facts.App
+import tech.alvarez.facts.Facts
 import tech.alvarez.facts.Message
-
 
 class Device {
     companion object {
@@ -25,17 +24,23 @@ class Device {
         fun hardware(): String = Build.HARDWARE
         fun imei(): String {
             val telephonyManager =
-                App.applicationContext()
+                Facts.applicationContext()
                     .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             if (ActivityCompat.checkSelfPermission(
-                    App.applicationContext(),
+                    Facts.applicationContext(),
                     Manifest.permission.READ_PHONE_STATE
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 return Message.requiresPermission
             }
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                telephonyManager.imei
+                try {
+                    telephonyManager.imei
+                } catch (e: SecurityException) {
+                    // https://developer.android.com/about/versions/10/privacy/changes#data-ids
+                    // https://source.android.com/devices/tech/config/device-identifiers
+                    "(For security reasons it is not possible to display this value from Android 10)"
+                }
             } else {
                 telephonyManager.deviceId
             }
@@ -72,7 +77,7 @@ class Device {
         }
 
         fun totalMemory(): String {
-            val actManager: ActivityManager = App.applicationContext()
+            val actManager: ActivityManager = Facts.applicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             val memInfo: ActivityManager.MemoryInfo = ActivityManager.MemoryInfo()
             actManager.getMemoryInfo(memInfo)
@@ -82,7 +87,7 @@ class Device {
         fun density(): String {
             val metrics = DisplayMetrics()
             val windowManager =
-                App.applicationContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                Facts.applicationContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
             windowManager.defaultDisplay.getMetrics(metrics)
             return when (metrics.densityDpi) {
                 DisplayMetrics.DENSITY_LOW -> "Low " + metrics.densityDpi.toString() + " dpi"
@@ -98,7 +103,7 @@ class Device {
         fun openGlVersion() = openGlVersionFromActivityManager()
 
         private fun openGlVersionFromActivityManager(): String {
-            val activityManager = App.applicationContext()
+            val activityManager = Facts.applicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             val configInfo = activityManager.deviceConfigurationInfo
             return if (configInfo.reqGlEsVersion != ConfigurationInfo.GL_ES_VERSION_UNDEFINED) {
@@ -109,7 +114,7 @@ class Device {
         }
 
         private fun openGlVersionFromPackageManager(): Int {
-            val packageManager = App.applicationContext().packageManager
+            val packageManager = Facts.applicationContext().packageManager
             val featureInfos = packageManager.systemAvailableFeatures
             if (featureInfos.isNotEmpty()) {
                 for (featureInfo in featureInfos) {

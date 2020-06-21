@@ -1,9 +1,16 @@
 package tech.alvarez.facts
 
 import android.Manifest
+import android.graphics.drawable.Drawable
 import tech.alvarez.facts.util.*
 
 data class Info(val label: String, val value: String, val icon: Int?, val permission: String?)
+data class App(
+    val icon: Drawable,
+    val name: String,
+    val packageName: String,
+    val version: String
+)
 
 fun Boolean.literal() = if (this) "Yes" else "No"
 
@@ -76,12 +83,27 @@ val featureInfo = listOf(
     Info("Fingerprint", Feature.hasFingerprint().literal(), R.drawable.ic_fingerprint, null),
     Info("Camera AR", Feature.hasCameraAR().literal(), R.drawable.ic_camera, null),
 
-    Info("Proximity Sensor", Feature.hasProximitySensor().literal(), R.drawable.ic_proximity_sensor, null),
+    Info(
+        "Proximity Sensor",
+        Feature.hasProximitySensor().literal(),
+        R.drawable.ic_proximity_sensor,
+        null
+    ),
     Info("Accelerometer Sensor", Feature.hasAccelerometerSensor().literal(), 0, null),
     Info("Gyroscope Sensor", Feature.hasGyroscopeSensor().literal(), R.drawable.ic_gyroscope, null),
     Info("Light Sensor", Feature.hasLightSensor().literal(), R.drawable.ic_light, null),
-    Info("Barometer Sensor (air pressure sensor)", Feature.hasBarometerSensor().literal(), R.drawable.ic_pressure, null),
-    Info("Temperature Sensor", Feature.hasAmbientTemperatureSensor().literal(), R.drawable.ic_temperature, null),
+    Info(
+        "Barometer Sensor (air pressure sensor)",
+        Feature.hasBarometerSensor().literal(),
+        R.drawable.ic_pressure,
+        null
+    ),
+    Info(
+        "Temperature Sensor",
+        Feature.hasAmbientTemperatureSensor().literal(),
+        R.drawable.ic_temperature,
+        null
+    ),
     Info("Step Counter Sensor", Feature.hasStepCounterSensor().literal(), 0, null),
     Info("Step Detector Sensor", Feature.hasStepDetectorSensor().literal(), 0, null)
 )

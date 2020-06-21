@@ -3,4 +3,16 @@
     <string name="app_description">Facts is a utility application to get device and OS information. Very useful for testers and developers, especially to obtain GMS and HMS information.\n\nThe application will be updated frequently with new information and new features. Feel free to create Pull Request in the repository, make suggestions, catch bugs, and comment.\n\nOf course, this project is open source.</string>
     <string name="project_page">Project Page</string>
     <string name="credits">Many cool icons by Icons8. https://icons8.com</string>
+
+    <string name="device">Device</string>
+    <string name="os">OS</string>
+    <string name="hms">HMS</string>
+    <string name="gms">GMS</string>
+    <string name="features">Features</string>
+    <string name="apps">Apps</string>
+    <string name="system_apps">System Apps</string>
+
+    <string name="not_available">Not Available</string>
+    <string name="requires_permission">"Requires Permission (tap here)"</string>
+    <string name="none">None</string>
 </resources>

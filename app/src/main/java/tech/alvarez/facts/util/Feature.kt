@@ -3,8 +3,7 @@ package tech.alvarez.facts.util
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
-import tech.alvarez.facts.App
-
+import tech.alvarez.facts.Facts
 
 class Feature {
     companion object {
@@ -46,7 +45,7 @@ class Feature {
         }
 
         private fun isFeatureAvailable(feature: String): Boolean {
-            val packageManager: PackageManager = App.applicationContext().packageManager
+            val packageManager: PackageManager = Facts.applicationContext().packageManager
             return packageManager.hasSystemFeature(feature)
         }
 
@@ -59,8 +58,9 @@ class Feature {
         }
 
         fun screenSize(): String {
-            val screenSize: Int = App.applicationContext().resources.configuration.screenLayout and
-                    Configuration.SCREENLAYOUT_SIZE_MASK
+            val screenSize: Int =
+                Facts.applicationContext().resources.configuration.screenLayout and
+                        Configuration.SCREENLAYOUT_SIZE_MASK
 
             val message: String
             message = when (screenSize) {

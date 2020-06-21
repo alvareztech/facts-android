@@ -1,7 +1,7 @@
 package tech.alvarez.facts.util
 
 import com.huawei.hms.api.HuaweiApiAvailability
-import tech.alvarez.facts.App
+import tech.alvarez.facts.Facts
 
 class HMS {
     companion object {
@@ -16,7 +16,7 @@ class HMS {
 
         fun isHMSAvailable(): Boolean {
             return HuaweiApiAvailability.getInstance()
-                .isHuaweiMobileServicesAvailable(App.applicationContext()) == com.huawei.hms.api.ConnectionResult.SUCCESS
+                .isHuaweiMobileServicesAvailable(Facts.applicationContext()) == com.huawei.hms.api.ConnectionResult.SUCCESS
         }
 
         fun hmsVersion() = Util.versionPackage("com.huawei.hwid")

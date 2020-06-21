@@ -1,9 +1,11 @@
 package tech.alvarez.facts
 
-enum class Category(val icon: Int) {
-    DEVICE(R.drawable.ic_phone),
-    OS(R.drawable.ic_adb),
-    HMS(R.drawable.ic_huawei),
-    GMS(R.drawable.ic_google_play),
-    FEATURES(R.drawable.ic_memory),
+enum class Category(val icon: Int, val title: Int) {
+    DEVICE(R.drawable.ic_phone, R.string.device),
+    OS(R.drawable.ic_adb, R.string.os),
+    HMS(R.drawable.ic_huawei, R.string.hms),
+    GMS(R.drawable.ic_google_play, R.string.gms),
+    FEATURES(R.drawable.ic_memory, R.string.features),
+    APPS(R.drawable.ic_apps, R.string.apps),
+    SYSTEM_APPS(R.drawable.ic_apps, R.string.system_apps),
 }
