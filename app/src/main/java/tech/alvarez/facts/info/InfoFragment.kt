@@ -1,7 +1,6 @@
 package tech.alvarez.facts.info
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -17,18 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.Info
 import tech.alvarez.facts.databinding.FragmentInfoBinding
+import tech.alvarez.facts.util.shareText
 
 private const val REQUEST_PERMISSIONS = 777
-
-fun Fragment.shareText(text: String) {
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, text)
-        type = "text/plain"
-    }
-    val shareIntent = Intent.createChooser(sendIntent, null)
-    startActivity(shareIntent)
-}
 
 class InfoFragment : Fragment() {
 

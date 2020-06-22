@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.databinding.FragmentAppsBinding
-import tech.alvarez.facts.info.shareText
+import tech.alvarez.facts.util.openApp
+import tech.alvarez.facts.util.shareText
 
 class AppsFragment : Fragment() {
 
@@ -51,7 +52,7 @@ class AppsFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         adapter = AppsAdapter(AppListener({
-
+            openApp(it.packageName)
         }, {
             shareApp(it)
         }))
