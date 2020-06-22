@@ -36,6 +36,7 @@ class Util {
             val list = mutableListOf<App>()
             val pm = Facts.applicationContext().packageManager
             val installedApps = pm.getInstalledPackages(0)
+            Log.d(TAG, "getInstalledPackages: ${installedApps.size}")
             for (app in installedApps) {
                 list.add(
                     App(
@@ -55,7 +56,7 @@ class Util {
             val list = mutableListOf<App>()
             val pm = Facts.applicationContext().packageManager
             val installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA)
-            Log.d(TAG, "installedApps: ${installedApps.size}")
+            Log.d(TAG, "getInstalledApplications: ${installedApps.size}")
             for (app in installedApps) {
                 list.add(
                     App(
@@ -71,21 +72,20 @@ class Util {
             return list
         }
 
-        fun systemApps(): List<App> {
+        fun userApps(): List<App> {
             val apps = mutableListOf<App>()
             val pm = Facts.applicationContext().packageManager
-
-            val mainIntent = Intent(Intent.ACTION_MAIN, null)
-            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-
-            val systemApps = pm.queryIntentActivities(mainIntent, 0)
-            for (app in systemApps) {
+            val intent = Intent(Intent.ACTION_MAIN, null)
+            intent.addCategory(Intent.CATEGORY_LAUNCHER)
+            val userApps = pm.queryIntentActivities(intent, 0)
+            for (app in userApps) {
+                val packageName = app.activityInfo.applicationInfo.packageName
                 apps.add(
                     App(
                         app.loadIcon(pm),
                         app.loadLabel(pm).toString(),
-                        if (app.resolvePackageName == null) "" else app.resolvePackageName,
-                        ""
+                        packageName,
+                        Util.versionPackage(packageName)
                     )
                 )
             }

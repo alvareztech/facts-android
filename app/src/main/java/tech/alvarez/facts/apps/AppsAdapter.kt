@@ -32,8 +32,8 @@ class AppsAdapter(private val appListener: AppListener) :
         fun bind(app: App, appListener: AppListener) = with(binding) {
             iconImageView.setImageDrawable(app.icon)
             nameTextView.text = app.name
+            versionTextView.text = app.version
             packageTextView.text = app.packageName
-            descriptionTextView.text = app.version
             root.setOnClickListener {
                 appListener.onClick(app)
             }

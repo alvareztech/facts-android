@@ -9,7 +9,7 @@
     <string name="hms">HMS</string>
     <string name="gms">GMS</string>
     <string name="features">Features</string>
-    <string name="apps">Apps</string>
+    <string name="user_apps">User Apps</string>
     <string name="system_apps">System Apps</string>
 
     <string name="not_available">Not Available</string>
