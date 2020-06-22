@@ -2,6 +2,10 @@ package tech.alvarez.facts.apps
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.util.Util
@@ -10,9 +14,15 @@ class AppsViewModel(private val category: Category) : ViewModel() {
 
     val information = MutableLiveData<List<App>>()
 
-    fun reloadInformation() = when (category) {
-        Category.APPS -> information.value = Util.userApps().sortedBy { it.name }
-        Category.PACKAGES -> information.value = Util.systemApps().sortedBy { it.name }
-        else -> information.value = emptyList()
+    fun load() {
+        viewModelScope.launch {
+            information.value = withContext(Dispatchers.IO) { loadApps() }
+        }
+    }
+
+    private fun loadApps(): List<App> = when (category) {
+        Category.APPS -> Util.userApps().sortedBy { it.name }
+        Category.PACKAGES -> Util.systemApps().sortedBy { it.name }
+        else -> emptyList()
     }
 }

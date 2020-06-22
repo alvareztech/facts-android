@@ -42,7 +42,8 @@ class AppsFragment : Fragment() {
             val position = getInt("position")
             category = Category.values()[position]
         }
-        viewModel = ViewModelProvider(this, AppsViewModelFactory(category)).get(AppsViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, AppsViewModelFactory(category)).get(AppsViewModel::class.java)
 
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
@@ -54,9 +55,11 @@ class AppsFragment : Fragment() {
         }))
         recyclerView.adapter = adapter
         viewModel.information.observe(viewLifecycleOwner, Observer {
+            binding.progressBar.visibility = View.GONE
             adapter.data = it
         })
-        viewModel.reloadInformation()
+        binding.progressBar.visibility = View.VISIBLE
+        viewModel.load()
     }
 
     override fun onDestroyView() {
