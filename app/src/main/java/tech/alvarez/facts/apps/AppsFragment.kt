@@ -9,8 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import tech.alvarez.facts.App
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.databinding.FragmentAppsBinding
+import tech.alvarez.facts.info.shareText
 
 class AppsFragment : Fragment() {
 
@@ -51,7 +53,7 @@ class AppsFragment : Fragment() {
         adapter = AppsAdapter(AppListener({
 
         }, {
-
+            shareApp(it)
         }))
         recyclerView.adapter = adapter
         viewModel.information.observe(viewLifecycleOwner, Observer {
@@ -60,6 +62,10 @@ class AppsFragment : Fragment() {
         })
         binding.progressBar.visibility = View.VISIBLE
         viewModel.load()
+    }
+
+    private fun shareApp(app: App) {
+        shareText("${app.name} ${app.version}\n${app.packageName}")
     }
 
     override fun onDestroyView() {

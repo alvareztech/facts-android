@@ -20,6 +20,16 @@ import tech.alvarez.facts.databinding.FragmentInfoBinding
 
 private const val REQUEST_PERMISSIONS = 777
 
+fun Fragment.shareText(text: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, text)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
+}
+
 class InfoFragment : Fragment() {
 
     private var _binding: FragmentInfoBinding? = null
@@ -78,14 +88,7 @@ class InfoFragment : Fragment() {
     }
 
     private fun shareItem(item: Info) {
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "${item.label}\n${item.value}")
-            type = "text/plain"
-        }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+        shareText("${item.label}\n${item.value}")
     }
 
     private fun hasPermissions(context: Context?, permissions: Array<String>): Boolean {
