@@ -12,7 +12,7 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = Category.values().size
 
     override fun createFragment(position: Int) = when (Category.values()[position]) {
-        Category.USER_APPS, Category.SYSTEM_APPS -> {
+        Category.APPS, Category.PACKAGES -> {
             val fragment = AppsFragment()
             fragment.arguments = Bundle().apply {
                 putInt("position", position)

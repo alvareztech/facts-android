@@ -9,6 +9,10 @@
     <string name="hms">HMS</string>
     <string name="gms">GMS</string>
     <string name="features">Features</string>
+    <string name="system">System</string>
+    <string name="user">User</string>
+    <string name="packages">Packages</string>
+    <string name="apps">Apps</string>
     <string name="user_apps">User Apps</string>
     <string name="system_apps">System Apps</string>
 

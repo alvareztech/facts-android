@@ -1,8 +1,10 @@
 package tech.alvarez.facts.util
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.os.Build
 import android.util.Log
 import tech.alvarez.facts.App
@@ -10,6 +12,12 @@ import tech.alvarez.facts.Facts
 import tech.alvarez.facts.Message
 
 private const val TAG = "FACTS"
+
+fun PackageInfo.isSystemPackage() = applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
+fun ResolveInfo.isSystemPackage() =
+    activityInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
+
+fun ApplicationInfo.isSystemPackage() = flags and ApplicationInfo.FLAG_SYSTEM != 0
 
 class Util {
     companion object {
@@ -32,44 +40,22 @@ class Util {
             }
         }
 
-        fun appList2(): List<App> {
-            val list = mutableListOf<App>()
+        fun systemApps(): List<App> {
+            val apps = mutableListOf<App>()
             val pm = Facts.applicationContext().packageManager
-            val installedApps = pm.getInstalledPackages(0)
-            Log.d(TAG, "getInstalledPackages: ${installedApps.size}")
+            val installedApps = pm.getInstalledApplications(0)
             for (app in installedApps) {
-                list.add(
-                    App(
-                        app.applicationInfo.loadIcon(pm),
-                        app.applicationInfo.loadLabel(pm).toString(),
-                        app.packageName,
-                        "${app.versionName} (${app.versionCode})"
-//                        if (app.loadDescription(pm) == null) "" else app.loadDescription(pm)
-                            .toString()
-                    )
-                )
-            }
-            return list
-        }
-
-        fun appList(): List<App> {
-            val list = mutableListOf<App>()
-            val pm = Facts.applicationContext().packageManager
-            val installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA)
-            Log.d(TAG, "getInstalledApplications: ${installedApps.size}")
-            for (app in installedApps) {
-                list.add(
+                apps.add(
                     App(
                         app.loadIcon(pm),
                         app.loadLabel(pm).toString(),
                         app.packageName,
-                        app.minSdkVersion.toString()
-//                        if (app.loadDescription(pm) == null) "" else app.loadDescription(pm)
-                            .toString()
+                        versionPackage(app.packageName),
+                        app.isSystemPackage()
                     )
                 )
             }
-            return list
+            return apps
         }
 
         fun userApps(): List<App> {
@@ -85,7 +71,8 @@ class Util {
                         app.loadIcon(pm),
                         app.loadLabel(pm).toString(),
                         packageName,
-                        Util.versionPackage(packageName)
+                        versionPackage(packageName),
+                        app.isSystemPackage()
                     )
                 )
             }

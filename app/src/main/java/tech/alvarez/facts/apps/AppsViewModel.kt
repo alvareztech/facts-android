@@ -11,8 +11,8 @@ class AppsViewModel(private val category: Category) : ViewModel() {
     val information = MutableLiveData<List<App>>()
 
     fun reloadInformation() = when (category) {
-        Category.USER_APPS -> information.value = Util.userApps().sortedBy { it.name }
-        Category.SYSTEM_APPS -> information.value = Util.appList().sortedBy { it.name }
+        Category.APPS -> information.value = Util.userApps().sortedBy { it.name }
+        Category.PACKAGES -> information.value = Util.systemApps().sortedBy { it.name }
         else -> information.value = emptyList()
     }
 }

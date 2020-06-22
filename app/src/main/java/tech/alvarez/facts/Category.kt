@@ -6,6 +6,6 @@ enum class Category(val icon: Int, val title: Int) {
     HMS(R.drawable.ic_huawei, R.string.hms),
     GMS(R.drawable.ic_google_play, R.string.gms),
     FEATURES(R.drawable.ic_memory, R.string.features),
-    USER_APPS(R.drawable.ic_apps, R.string.user_apps),
-    SYSTEM_APPS(R.drawable.ic_apps, R.string.system_apps),
+    APPS(R.drawable.ic_apps, R.string.apps),
+    PACKAGES(R.drawable.ic_box_settings, R.string.packages),
 }

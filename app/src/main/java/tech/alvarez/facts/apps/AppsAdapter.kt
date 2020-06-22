@@ -1,6 +1,7 @@
 package tech.alvarez.facts.apps
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import tech.alvarez.facts.App
@@ -34,6 +35,7 @@ class AppsAdapter(private val appListener: AppListener) :
             nameTextView.text = app.name
             versionTextView.text = app.version
             packageTextView.text = app.packageName
+            userAppChip.visibility = if (app.isSystemPackage) View.GONE else View.VISIBLE
             root.setOnClickListener {
                 appListener.onClick(app)
             }

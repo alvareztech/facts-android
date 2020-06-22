@@ -9,7 +9,8 @@ data class App(
     val icon: Drawable,
     val name: String,
     val packageName: String,
-    val version: String
+    val version: String,
+    val isSystemPackage: Boolean
 )
 
 fun Boolean.literal() = if (this) "Yes" else "No"
