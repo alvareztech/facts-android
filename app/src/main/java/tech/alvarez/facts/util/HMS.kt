@@ -1,7 +1,12 @@
 package tech.alvarez.facts.util
 
+import com.huawei.hms.ads.identifier.AdvertisingIdClient
 import com.huawei.hms.api.HuaweiApiAvailability
+import com.huawei.hms.api.HuaweiServicesNotAvailableException
 import tech.alvarez.facts.Facts
+import tech.alvarez.facts.Message
+import java.io.IOException
+import java.util.concurrent.TimeoutException
 
 class HMS {
     companion object {
@@ -21,5 +26,22 @@ class HMS {
 
         fun hmsVersion() = Util.versionPackage("com.huawei.hwid")
         fun appGalleryVersion() = Util.versionPackage("com.huawei.appmarket")
+
+        // Open Advertising Identifier
+        fun oaid() = try {
+            val info = AdvertisingIdClient.getAdvertisingIdInfo(Facts.applicationContext())
+            info.id
+        } catch (e: IOException) {
+            "${Message.notAvailable} (IO)"
+        } catch (e: HuaweiServicesNotAvailableException) {
+            "(Huawei Services Not Available)"
+        } catch (e: TimeoutException) {
+            "${Message.notAvailable} (Timeout)"
+        } catch (e: InterruptedException) {
+            "${Message.notAvailable} (Interrupted)"
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Message.notAvailable
+        }
     }
 }

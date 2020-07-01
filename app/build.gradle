@@ -67,6 +67,7 @@ dependencies {
 
     implementation 'com.huawei.hms:hianalytics:5.0.0.301'
     implementation 'com.huawei.agconnect:agconnect-crash:1.2.1.300'
+    implementation 'com.huawei.hms:ads-identifier:3.4.30.307'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
