@@ -22,3 +22,5 @@ keyPassword=YOUR_ALIAS_PASSWORD
 ## Download
 
 [Huawei AppGallery](https://appgallery.cloud.huawei.com/marketshare/app/C102297755)
+
+[Google Play Store](https://play.google.com/store/apps/details?id=tech.alvarez.facts)
