@@ -19,6 +19,10 @@ fun Fragment.openApp(packageName: String) {
     val intent = pm.getLaunchIntentForPackage(packageName)
     intent?.let {
         it.addCategory(Intent.CATEGORY_LAUNCHER)
-        startActivity(it)
+        try {
+            startActivity(it)
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
     }
 }
