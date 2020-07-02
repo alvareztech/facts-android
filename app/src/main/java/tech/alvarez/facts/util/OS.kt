@@ -57,11 +57,7 @@ class OS {
                 if (versionEmui.startsWith("EmotionUI_")) {
                     versionEmui = versionEmui.substring(10, versionEmui.length)
                 }
-                return if (versionEmui.isNotEmpty()) {
-                    versionEmui
-                } else {
-                    Message.notAvailable
-                }
+                return versionEmui.ifEmpty { Message.notAvailable }
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()
             } catch (e: NoSuchMethodException) {

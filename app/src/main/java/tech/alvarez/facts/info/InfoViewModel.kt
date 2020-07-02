@@ -18,35 +18,34 @@ class InfoViewModel(private val category: Category) : ViewModel() {
         Category.DEVICE -> information.value = deviceInfo()
         Category.GMS -> {
             information.value = gmsInfo
-            loadAdsInformation()
+            loadGaidInfo()
         }
         Category.HMS -> {
             information.value = hmsInfo
-            loadAdsInformation()
+            loadOaidInfo()
         }
         Category.OS -> information.value = osInfo
         Category.FEATURES -> information.value = featureInfo
         else -> information.value = emptyList()
     }
 
-    private fun loadAdsInformation() {
+    private fun loadGaidInfo() {
         viewModelScope.launch {
-            when (category) {
-                Category.HMS -> {
-                    val oaid = withContext(Dispatchers.IO) { HMS.oaid() }
-                    val list = mutableListOf<Info>()
-                    list.addAll(hmsInfo)
-                    list.add(Info("OAID", oaid, null, null))
-                    information.value = list
-                }
-                Category.GMS -> {
-                    val oaid = withContext(Dispatchers.IO) { GMS.gaid() }
-                    val list = mutableListOf<Info>()
-                    list.addAll(hmsInfo)
-                    list.add(Info("Google Advertising ID", oaid, null, null))
-                    information.value = list
-                }
-            }
+            val gaid = withContext(Dispatchers.IO) { GMS.gaid() }
+            val list = mutableListOf<Info>()
+            list.addAll(gmsInfo)
+            list.add(Info("Google Advertising ID", gaid, null, null))
+            information.value = list
+        }
+    }
+
+    private fun loadOaidInfo() {
+        viewModelScope.launch {
+            val oaid = withContext(Dispatchers.IO) { HMS.oaid() }
+            val list = mutableListOf<Info>()
+            list.addAll(hmsInfo)
+            list.add(Info("OAID", oaid, null, null))
+            information.value = list
         }
     }
 }
