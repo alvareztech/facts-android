@@ -71,7 +71,8 @@ val hmsInfo = listOf(
     Info("Activity Name", HMS.activityName(), null, null),
     Info("Version Code ID", HMS.versionCodeId(), null, null),
     Info("JSON Version Min", HMS.jsonVersionMin(), null, null),
-    Info("App ID", HMS.appId(), null, null)
+    Info("App ID", HMS.appId(), null, null),
+    Info("Application Associated ID (AAID)", HMS.aaid(), null, null)
 )
 
 val featureInfo = listOf(
@@ -108,3 +109,5 @@ val featureInfo = listOf(
     Info("Step Counter Sensor", Feature.hasStepCounterSensor().literal(), 0, null),
     Info("Step Detector Sensor", Feature.hasStepDetectorSensor().literal(), 0, null)
 )
+
+val batteryInfo = Battery.infoList()

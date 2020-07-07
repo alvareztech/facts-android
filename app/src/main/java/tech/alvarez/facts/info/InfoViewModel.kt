@@ -26,6 +26,7 @@ class InfoViewModel(private val category: Category) : ViewModel() {
         }
         Category.OS -> information.value = osInfo
         Category.FEATURES -> information.value = featureInfo
+        Category.BATTERY -> information.value = batteryInfo
         else -> information.value = emptyList()
     }
 
@@ -44,7 +45,7 @@ class InfoViewModel(private val category: Category) : ViewModel() {
             val oaid = withContext(Dispatchers.IO) { HMS.oaid() }
             val list = mutableListOf<Info>()
             list.addAll(hmsInfo)
-            list.add(Info("OAID", oaid, null, null))
+            list.add(Info("Open Advertising Identifier (OAID)", oaid, null, null))
             information.value = list
         }
     }

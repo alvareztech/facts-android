@@ -1,5 +1,6 @@
 package tech.alvarez.facts.util
 
+import com.huawei.hms.aaid.HmsInstanceId
 import com.huawei.hms.ads.identifier.AdvertisingIdClient
 import com.huawei.hms.api.HuaweiApiAvailability
 import com.huawei.hms.api.HuaweiServicesNotAvailableException
@@ -27,6 +28,10 @@ class HMS {
         fun hmsVersion() = Util.versionPackage("com.huawei.hwid")
         fun appGalleryVersion() = Util.versionPackage("com.huawei.appmarket")
 
+        fun aaid(): String {
+            val instance = HmsInstanceId.getInstance(Facts.applicationContext())
+            return instance.id
+        }
         // Open Advertising Identifier
         fun oaid() = try {
             val info = AdvertisingIdClient.getAdvertisingIdInfo(Facts.applicationContext())
