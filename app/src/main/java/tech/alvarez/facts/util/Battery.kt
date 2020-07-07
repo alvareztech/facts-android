@@ -16,16 +16,16 @@ class Battery {
             val intent = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let {
                 Facts.applicationContext().registerReceiver(null, it)
             }
-            intent?.let { intent ->
+            intent?.let { i ->
                 return mutableListOf<Info>().apply {
-                    add(Info("Level", "${percentage(intent)} %", null, null))
-                    add(Info("Status", status(intent), null, null))
-                    add(Info("Temperature", temperature(intent), null, null))
-                    add(Info("Voltage", voltage(intent), null, null))
+                    add(Info("Level", "${percentage(i)} %", null, null))
+                    add(Info("Status", status(i), null, null))
+                    add(Info("Temperature", temperature(i), null, null))
+                    add(Info("Voltage", voltage(i), null, null))
                     add(Info("Capacity", capacity(), null, null))
-                    add(Info("Health", health(intent), null, null))
-                    add(Info("Plugged", plugged(intent), null, null))
-                    add(Info("Technology", technology(intent), null, null))
+                    add(Info("Health", health(i), null, null))
+                    add(Info("Plugged", plugged(i), null, null))
+                    add(Info("Technology", technology(i), null, null))
                 }
             }
             return emptyList()
