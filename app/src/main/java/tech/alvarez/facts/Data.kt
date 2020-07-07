@@ -41,16 +41,16 @@ fun deviceInfo(): List<Info> {
 }
 
 val osInfo = listOf(
-    Info("Version Release", OS.versionRelease(), null, null),
-    Info("SDK", OS.sdk(), null, null),
-    Info("Base OS", OS.baseOS(), null, null),
-    Info("Version Codename", OS.versionCodename(), null, null),
-    Info("Security Path", OS.securityPath(), null, null),
-    Info("Board", Device.board(), null, null),
-    Info("Display", Device.display(), null, null),
-    Info("Hardware", Device.hardware(), null, null),
-    Info("EMUI Version", OS.emuiVersion(), null, null),
-    Info("MIUI Version", OS.miuiVersion(), null, null)
+    Info("Version Release", OS.versionRelease(), 0, null),
+    Info("SDK", OS.sdk(), 0, null),
+    Info("Base OS", OS.baseOS(), 0, null),
+    Info("Version Codename", OS.versionCodename(), 0, null),
+    Info("Security Path", OS.securityPath(), 0, null),
+    Info("Board", Device.board(), 0, null),
+    Info("Display", Device.display(), 0, null),
+    Info("Hardware", Device.hardware(), 0, null),
+    Info("EMUI Version", OS.emuiVersion(), R.drawable.ic_huawei, null),
+    Info("MIUI Version", OS.miuiVersion(), R.drawable.ic_xiaomi, null)
 )
 
 val gmsInfo = listOf(
