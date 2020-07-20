@@ -21,7 +21,8 @@ class AppsViewModel(private val category: Category) : ViewModel() {
     }
 
     private fun loadApps(): List<App> = when (category) {
-        Category.APPS -> Util.userApps().sortedBy { it.name }
+        Category.USER_APPS -> Util.userApps().sortedBy { it.name }.filter { !it.isSystemPackage }
+        Category.SYSTEM_APPS -> Util.userApps().sortedBy { it.name }.filter { it.isSystemPackage }
         Category.PACKAGES -> Util.systemApps().sortedBy { it.name }
         else -> emptyList()
     }
