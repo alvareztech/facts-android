@@ -9,10 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import tech.alvarez.facts.App
 import tech.alvarez.facts.Category
 import tech.alvarez.facts.databinding.FragmentAppsBinding
 import tech.alvarez.facts.util.openApp
+import tech.alvarez.facts.util.openInTheMarket
+import tech.alvarez.facts.util.openPlayStoreWeb
 import tech.alvarez.facts.util.shareText
 
 class AppsFragment : Fragment() {
@@ -52,7 +55,7 @@ class AppsFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         adapter = AppsAdapter(AppListener({
-            openApp(it.packageName)
+            handleSelectApp(it)
         }, {
             shareApp(it)
         }))
@@ -65,8 +68,26 @@ class AppsFragment : Fragment() {
         viewModel.load()
     }
 
+    private fun handleSelectApp(app: App) {
+        val items = arrayOf(
+            "Open App",
+            "Open in the Market App",
+            "Open in Play Store Web"
+        )
+        MaterialAlertDialogBuilder(context)
+            .setTitle(app.name)
+            .setItems(items) { _, which ->
+                when (which) {
+                    0 -> openApp(app.packageName)
+                    1 -> openInTheMarket(app.packageName)
+                    2 -> openPlayStoreWeb(app.packageName)
+                }
+            }
+            .show()
+    }
+
     private fun shareApp(app: App) {
-        shareText("${app.name} ${app.version}\n${app.packageName}")
+        shareText("${app.name}\n${app.version}\n${app.packageName}")
     }
 
     override fun onDestroyView() {
