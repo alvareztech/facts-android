@@ -25,7 +25,7 @@ jobs:
         gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch keystore.properties.asc > keystore.properties
         echo "${{ secrets.AGCONNECT_SERVICES }}" > agconnect-services.json.asc 
         gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch agconnect-services.json.asc > app/agconnect-services.json
-    - name: Add permission
-      run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleRelease
