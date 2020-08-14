@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: set up JDK 1.8
@@ -22,15 +20,18 @@ jobs:
         echo "${{ secrets.KEYSTORE }}" > alvareztech.jks.asc
         gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch alvareztech.jks.asc > app/alvareztech.jks
         echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc
-        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch keystore.properties.asc > keystore.properties
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PROPERTIES_PASSPHRASE }}" --batch keystore.properties.asc > keystore.properties
         echo "${{ secrets.AGCONNECT_SERVICES }}" > agconnect-services.json.asc 
-        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch agconnect-services.json.asc > app/agconnect-services.json
+        gpg -d --passphrase "${{ secrets.AGCONNECT_SERVICES_PASSPHRASE }}" --batch agconnect-services.json.asc > app/agconnect-services.json
     - name: Build with Gradle
       run: |
         chmod +x gradlew
         ./gradlew assembleRelease
+        
+  publish:
+    runs-on: ubuntu-latest
+    steps:
     - name: Publish APK
       uses: actions/upload-artifact@v2
       with:
-        name: apprelease.apk
         path: app/build/outputs/apk/release/app-release.apk
