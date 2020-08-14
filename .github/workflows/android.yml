@@ -17,6 +17,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Prepare Secret Files
+      run: |
+        echo "${{ secrets.KEYSTORE }}" > alvareztech.jks.asc
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch alvareztech.jks.asc > app/alvareztech.jks
+        echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch keystore.properties.asc > keystore.properties
+        echo "${{ secrets.AGCONNECT_SERVICES }}" > agconnect-services.json.asc 
+        gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch agconnect-services.json.asc > app/agconnect-services.json
     - name: Add permission
       run: chmod +x gradlew
     - name: Build with Gradle
