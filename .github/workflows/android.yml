@@ -29,3 +29,8 @@ jobs:
       run: |
         chmod +x gradlew
         ./gradlew assembleRelease
+    - name: Publish APK
+      uses: actions/download-artifact@v2
+      with:
+        name: release.apk
+        path: app/build/outputs/apk/release/app-release.apk
