@@ -27,10 +27,6 @@ jobs:
       run: |
         chmod +x gradlew
         ./gradlew assembleRelease
-        
-  publish:
-    runs-on: ubuntu-latest
-    steps:
     - name: Publish APK
       uses: actions/upload-artifact@v2
       with:
