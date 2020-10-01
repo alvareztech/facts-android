@@ -17,6 +17,7 @@ jobs:
         java-version: 1.8
     - name: Prepare Secret Files
       run: |
+        python --version
         echo "${{ secrets.KEYSTORE }}" > alvareztech.jks.asc
         gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch alvareztech.jks.asc > app/alvareztech.jks
         echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc
