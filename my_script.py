@@ -85,9 +85,10 @@ def update_app_file_info(file_url, file_size, client_id, access_token, app_id):
         print('app-file-info: ' + str(response.status_code) + ': ' + response.reason)
 
 
-app_id = '102297755'
-client_id = '428480937370584064'
-client_secret = '89B14190595D0785516119D613E704B0E73EF9EC6B9503CFBC8A0C2217048DE5'
+app_id = str(sys.argv[1])
+client_id = str(sys.argv[2])
+client_secret = str(sys.argv[3])
+path_file = str(sys.argv[4])
 access_token = get_token(client_id=client_id,
                             client_secret=client_secret)
 upload_url, auth_code = get_upload_url(access_token=access_token,
@@ -95,7 +96,7 @@ upload_url, auth_code = get_upload_url(access_token=access_token,
                                         app_id=app_id)
 upload_file(upload_url=upload_url,
             auth_code=auth_code,
-            path_file=str(sys.argv[1]),
+            path_file=path_file,
             access_token=access_token,
             client_id=client_id,
             app_id=app_id)
