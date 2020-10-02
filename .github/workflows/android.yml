@@ -37,4 +37,4 @@ jobs:
         python --version
         pip --version
         pip install requests
-        python my_script.py app/build/outputs/apk/release/app-release.apk
+        python my_script.py "102297755" secrets.CLIENT_ID secrets.CLIENT_SECRET app/build/outputs/apk/release/app-release.apk
