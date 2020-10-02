@@ -89,11 +89,15 @@ app_id = str(sys.argv[1])
 client_id = str(sys.argv[2])
 client_secret = str(sys.argv[3])
 path_file = str(sys.argv[4])
+print app_id
+print client_id
+print client_secret
+print path_file
 access_token = get_token(client_id=client_id,
-                            client_secret=client_secret)
+                         client_secret=client_secret)
 upload_url, auth_code = get_upload_url(access_token=access_token,
-                                        client_id=client_id,
-                                        app_id=app_id)
+                                       client_id=client_id,
+                                       app_id=app_id)
 upload_file(upload_url=upload_url,
             auth_code=auth_code,
             path_file=path_file,
