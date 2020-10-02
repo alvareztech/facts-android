@@ -3,6 +3,7 @@ import sys
 
 
 def get_token(client_id, client_secret):
+    print 'Get Token...'
     url = 'https://connect-api.cloud.huawei.com/api/oauth2/v1/token'
     body = {
         'grant_type': 'client_credentials',
@@ -18,6 +19,7 @@ def get_token(client_id, client_secret):
 
 
 def get_upload_url(access_token, client_id, app_id):
+    print 'Get Upload URL...'
     url = 'https://connect-api.cloud.huawei.com/api/publish/v2/upload-url'
     params = {
         'appId': app_id,
@@ -36,6 +38,7 @@ def get_upload_url(access_token, client_id, app_id):
 
 
 def upload_file(upload_url, auth_code, path_file, access_token, client_id, app_id):
+    print 'Upload File...'
     headers = {
         "accept": "application/json"
     }
@@ -58,6 +61,7 @@ def upload_file(upload_url, auth_code, path_file, access_token, client_id, app_i
 
 
 def update_app_file_info(file_url, file_size, client_id, access_token, app_id):
+    print 'Update App File Info...'
     url = 'https://connect-api.cloud.huawei.com/api/publish/v2/app-file-info'
     headers = {
         'client_id': client_id,
@@ -66,7 +70,7 @@ def update_app_file_info(file_url, file_size, client_id, access_token, app_id):
     body = {
         'fileType': 5,
         'files': [{
-            'fileName': 'this_is_a_new.apk',
+            'fileName': 'new_app_release.apk',
             'fileDestUrl': file_url,
             'size': file_size
         }]
@@ -89,10 +93,7 @@ app_id = str(sys.argv[1])
 client_id = str(sys.argv[2])
 client_secret = str(sys.argv[3])
 path_file = str(sys.argv[4])
-print app_id
-print client_id
-print client_secret
-print path_file
+print app_id, client_id, client_secret, path_file
 access_token = get_token(client_id=client_id,
                          client_secret=client_secret)
 upload_url, auth_code = get_upload_url(access_token=access_token,
