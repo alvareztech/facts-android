@@ -91,3 +91,5 @@ lint/tmp/
 
 # Keystore properties
 keystore.properties
+
+*.asc
