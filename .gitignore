@@ -93,3 +93,4 @@ lint/tmp/
 keystore.properties
 
 *.asc
+.DS_Store
