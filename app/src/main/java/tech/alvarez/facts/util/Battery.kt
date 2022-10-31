@@ -54,7 +54,7 @@ class Battery {
                 BatteryManager.BATTERY_STATUS_FULL -> "Full"
                 else -> Message.notAvailable
             }
-
+        // TODO: Avoid non-null assert
         private fun technology(intent: Intent) =
             intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY).ifBlank { Message.notAvailable }
 

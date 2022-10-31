@@ -35,7 +35,8 @@ class InfoViewModel(private val category: Category) : ViewModel() {
             val gaid = withContext(Dispatchers.IO) { GMS.gaid() }
             val list = mutableListOf<Info>()
             list.addAll(gmsInfo)
-            list.add(Info("Google Advertising ID", gaid, null, null))
+            // TODO: Avoid non-null assert
+            list.add(Info("Google Advertising ID", gaid!!, null, null))
             information.value = list
         }
     }

@@ -74,7 +74,7 @@ class AppsFragment : Fragment() {
             "Open in the Market App",
             "Open in Play Store Web"
         )
-        MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle(app.name)
             .setItems(items) { _, which ->
                 when (which) {
